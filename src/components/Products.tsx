@@ -176,17 +176,17 @@ const ProductsIn2Rows = ({
 
   return (
     <div className="h-[600svh] relative flex flex-col" ref={containerRef}>
-      <div className="sticky top-0 h-[20vh] bg-black">
+      <div className="sticky top-0 h-[30vh] bg-black">
         <AnimatePresence presenceAffectsLayout={false}>
           <motion.div
             key={products[currentIndex].modelName}
-            className="flex flex-col items-center justify-center absolute inset-0 px-10 lg:px-20"
+            className="flex flex-col items-center justify-center absolute inset-0 px-5 lg:px-20"
             transition={{ duration: 0.35 }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
           >
-            <div className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">
+            <div className="text md:text-lg">
               <span className="block text-center">
                 <span className="font-bold bg-white text-black px-2 mr-2 rounded-sm">
                   modelo:
@@ -197,17 +197,17 @@ const ProductsIn2Rows = ({
               </span>
             </div>
             <br />
-            <p className="text-xl mt-2 font-mono text-center md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl">
+            <p className="text font-mono text-center">
               {products[currentIndex].description}
             </p>
             <br />
-            <p className="text-xl mt-2 font-bold text-right w-full">
+            <p className="text mt-2 font-bold text-right w-full">
               {products[currentIndex].value}
             </p>
           </motion.div>
         </AnimatePresence>
       </div>
-      <div className="sticky top-[20vh] h-[80vh] bg-white overflow-hidden">
+      <div className="sticky top-[30vh] h-[70vh] bg-white overflow-hidden">
         <AnimatePresence presenceAffectsLayout={false}>
           <motion.div
             key={products[currentIndex].imageUrls[0]}

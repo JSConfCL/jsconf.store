@@ -1,7 +1,9 @@
+import { motion } from "framer-motion";
+
 export const Footer = () => {
   return (
-    <footer className="bg-black py-24">
-      <div className="flex flex-col items-center left-0 right-0">
+    <footer className="bg-black py-24 h-[100svh]">
+      <div className="flex flex-col items-center justify-center h-full gap-10 left-0 right-0">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -16,9 +18,25 @@ export const Footer = () => {
             clipRule="evenodd"
           />
         </svg>
-        <br />
+        <span className="text-[15vmin] md:text-[18vmin] lg:text-[20vmin] font-bold text-white font-mono drop-shadow-xl text-center leading-[0.9]">
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            jsconf
+          </motion.span>
+          <br />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            .store
+          </motion.div>
+        </span>
         <span className="text-white text-sm font-semibold font-mono">
-          jsconf.store is a project by jsconf.cl
+          a project by jsconf.cl
         </span>
       </div>
     </footer>
