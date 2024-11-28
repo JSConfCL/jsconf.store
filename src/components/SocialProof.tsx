@@ -11,17 +11,20 @@ const testimonials = [
     name: "Ricardo — @diruzcode",
     quote: "Odio el animé, pero amo el polerón de la jsconf.",
     imageUrl: "https://avatars.githubusercontent.com/u/12041331?v=4",
+    link: "https://github.com/diruzcode",
   },
 
   {
     name: "Ana — @uxanarangel",
     quote: "Si se vende todo, hago un mega-livestream de 24 horas.",
     imageUrl: "https://avatars.githubusercontent.com/u/30361612?v=4",
+    link: "https://uxanarangel.com/",
   },
   {
     name: "Felipe — @fforres",
     quote: "Oooh, el gorro weno",
     imageUrl: "https://avatars.githubusercontent.com/u/952992?v=4",
+    link: "https://fforr.es",
   },
 ];
 
@@ -68,7 +71,13 @@ const TestimonialsIn2Columns = () => {
             <br />
             <br />
             <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl flex justify-end flex-col items-end font-mono  w-full">
-              {testimonials[currentIndex].name}
+              <a
+                href={testimonials[currentIndex].link}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {testimonials[currentIndex].name}
+              </a>
             </p>
           </motion.div>
         </AnimatePresence>
