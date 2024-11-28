@@ -1,6 +1,6 @@
 export const TextSection = () => {
   return (
-    <section className="flex flex-col bg-white py-28">
+    <section className="flex flex-col bg-white py-28" id="next-section">
       <div className="container mx-auto px-11">
         <p className="leading-10 lg:leading-relaxed max-w-5xl mx-auto text-4xl lg:text-4xl tracking-tight">
           <strong>JSConf Chile está de vuelta!</strong> Durante casi una década,
