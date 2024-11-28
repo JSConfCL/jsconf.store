@@ -2,8 +2,8 @@ import { useEffect, useRef, useState, type RefObject } from "react";
 import {
   AnimatePresence,
   motion,
+  type MotionValue,
   useScroll,
-  useTransform,
 } from "framer-motion";
 
 const testimonials = [
@@ -21,18 +21,43 @@ const testimonials = [
     link: "https://uxanarangel.com/",
   },
   {
+    name: "Joel — @DezkaReid",
+    quote:
+      "Si tengo que elegir entre el one piece, y el gorro de la jsconf?... el gorro.",
+    imageUrl: "https://avatars.githubusercontent.com/u/1269896?v=4",
+    link: "https://x.com/dezkareid",
+  },
+  {
     name: "Felipe — @fforres",
     quote: "Y no hay de React?",
     imageUrl: "https://avatars.githubusercontent.com/u/952992?v=4",
     link: "https://fforr.es",
   },
   {
-    name: "Miguel Duran — @midudev",
+    name: "Miguel Duran — @Midudev",
     quote: "Quien eres tu! Que haces aquí?! Sal de mi casa!",
     imageUrl: "https://avatars.githubusercontent.com/u/1561955?v=4",
     link: "https://github.com/midudev",
   },
 ];
+
+const useCalculateCurrentIndex = (scrollYProgress: MotionValue<number>) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const length = testimonials.length;
+
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on("change", (latest) => {
+      const dynamicIndex = Math.floor(latest * length);
+      if (dynamicIndex >= 0 && dynamicIndex < length) {
+        setCurrentIndex(dynamicIndex);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [scrollYProgress, length]);
+
+  return currentIndex;
+};
 
 const TestimonialsIn2Columns = ({
   scrollRef,
@@ -45,24 +70,9 @@ const TestimonialsIn2Columns = ({
     target: containerRef,
     offset: ["start start", "end start"],
   });
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const unsubscribe = scrollYProgress.on("change", (latest) => {
-      if (latest <= 1 / 3) {
-        setCurrentIndex(0);
-      } else if (latest <= 2 / 3) {
-        setCurrentIndex(1);
-      } else {
-        setCurrentIndex(2);
-      }
-    });
-
-    return () => unsubscribe();
-  }, [scrollYProgress]);
-
+  const currentIndex = useCalculateCurrentIndex(scrollYProgress);
   return (
-    <div className="h-[400svh] grid grid-cols-12 relative" ref={containerRef}>
+    <div className="h-[500svh] grid grid-cols-12 relative" ref={containerRef}>
       <div className="col-span-6 bg-black sticky top-0 h-[100svh]">
         <AnimatePresence presenceAffectsLayout={false}>
           <motion.div
@@ -128,27 +138,10 @@ const TestimonialsIn2Rows = ({
     target: containerRef,
     offset: ["start start", "end start"],
   });
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const unsubscribe = scrollYProgress.on("change", (latest) => {
-      console.log(latest);
-      if (latest <= 1 / 3) {
-        setCurrentIndex(0);
-      } else if (latest <= 2 / 3) {
-        setCurrentIndex(1);
-      } else {
-        setCurrentIndex(2);
-      }
-    });
-
-    return () => unsubscribe();
-  }, [scrollYProgress]);
-
-  console.log({ currentIndex });
+  const currentIndex = useCalculateCurrentIndex(scrollYProgress);
 
   return (
-    <div className="h-[400svh] relative flex flex-col" ref={containerRef}>
+    <div className="h-[500svh] relative flex flex-col" ref={containerRef}>
       <div className="sticky top-0 h-[50vh] bg-black">
         <AnimatePresence presenceAffectsLayout={false}>
           <motion.div

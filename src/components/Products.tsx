@@ -39,8 +39,6 @@ const products = [
       "Un polerón acogedor que te envuelve como un closure. Ideal para esas sesiones de programación en invierno.",
     imageUrls: [
       "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/9c839f57-94ac-4806-276f-1d37eac20700/default",
-      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/9c839f57-94ac-4806-276f-1d37eac20700/default",
-      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/9c839f57-94ac-4806-276f-1d37eac20700/default",
     ],
     value: "$ 22 Lukas",
   },
@@ -193,7 +191,7 @@ const ProductsIn2Rows = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
           >
-            <div className="text md:text-lg">
+            <div className="text  md:text-lg">
               <span className="block text-center">
                 <span className="font-bold bg-white text-black px-2 mr-2 rounded-sm">
                   modelo:
@@ -216,24 +214,22 @@ const ProductsIn2Rows = ({
       </div>
       <div className="sticky top-[30vh] h-[70vh] bg-white overflow-hidden">
         <AnimatePresence presenceAffectsLayout={false}>
-          {products[currentIndex].imageUrls.map((url) => (
-            <motion.div
-              key={url}
-              className="flex items-center justify-center absolute inset-0"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.35 }}
-            >
-              <div className="px-4">
-                <img
-                  src={products[currentIndex].imageUrls[0]}
-                  alt=""
-                  className="w-full object-cover"
-                />
-              </div>
-            </motion.div>
-          ))}
+          <motion.div
+            key={products[currentIndex].imageUrls[0]}
+            className="flex items-center justify-center absolute inset-0"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.35 }}
+          >
+            <div className="px-4">
+              <img
+                src={products[currentIndex].imageUrls[0]}
+                alt=""
+                className="w-full object-cover"
+              />
+            </div>
+          </motion.div>
         </AnimatePresence>
       </div>
     </div>
