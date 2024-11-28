@@ -2,58 +2,30 @@ import { useEffect, useRef, useState } from "react";
 import {
   AnimatePresence,
   motion,
-  useInView,
   useScroll,
   useTransform,
 } from "framer-motion";
-import { useRect } from "@darkroom.engineering/hamo";
 
-interface ProductSectionProps {
-  modelName: string;
-  description: string;
-  imageUrls: string[];
-}
+const testimonials = [
+  {
+    name: "Ricardo — @diruzcode",
+    quote: "Odio el animé, pero amo el polerón de la jsconf.",
+    imageUrl: "https://avatars.githubusercontent.com/u/12041331?v=4",
+  },
 
-const products = [
   {
-    modelName: "[Object object]",
-    description:
-      "Inspirada en la JSConf. Perfecta para sesiones de programación o para mostrar tu amor por el desarrollo web.",
-    imageUrls: [
-      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/3e979acb-3e9d-43e3-2f8c-276f4b3dc000/default",
-    ],
+    name: "Ana — @uxanarangel",
+    quote: "Si se vende todo, hago un mega-livestream de 24 horas.",
+    imageUrl: "https://avatars.githubusercontent.com/u/30361612?v=4",
   },
   {
-    modelName: "undefined is not a function",
-    description:
-      "Un diseño impredecible como un 'undefined', confuso como el 'this', pero que al final hace sentido... como JavaScript.",
-    imageUrls: [
-      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/89889d43-c367-4478-2996-aef9870d2100/default",
-    ],
-  },
-  {
-    modelName: 'console.log("pal frio")',
-    description:
-      "Un polerón acogedor que te envuelve como un closure. Ideal para esas sesiones de programación en invierno.",
-    imageUrls: [
-      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/9c839f57-94ac-4806-276f-1d37eac20700/default",
-      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/9c839f57-94ac-4806-276f-1d37eac20700/default",
-      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/9c839f57-94ac-4806-276f-1d37eac20700/default",
-    ],
-  },
-  // hat
-  {
-    modelName: "jav-HAT-script",
-    description:
-      "Protegete cuando el sol está HOT(reload). El complemento perfecto para 𝚕̶𝚘̶𝚜̶ ̶𝚍̶𝚒̶𝚊̶𝚜̶ ̶𝚍̶𝚎̶ ̶𝚙̶𝚒̶𝚜̶𝚌̶𝚒̶𝚗̶𝚊̶ cuando trabajas desde la casa.",
-    imageUrls: [
-      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/037a580b-3a53-49c0-75d2-0143379de700/default",
-    ],
+    name: "Felipe — @fforres",
+    quote: "Oooh, el gorro weno",
+    imageUrl: "https://avatars.githubusercontent.com/u/952992?v=4",
   },
 ];
 
-const ProductsIn2Columns = () => {
-  const index = 0;
+const TestimonialsIn2Columns = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -67,10 +39,8 @@ const ProductsIn2Columns = () => {
         setCurrentIndex(0);
       } else if (latest <= 3 / 5) {
         setCurrentIndex(1);
-      } else if (latest <= 4 / 5) {
-        setCurrentIndex(2);
       } else {
-        setCurrentIndex(3);
+        setCurrentIndex(2);
       }
     });
 
@@ -78,31 +48,27 @@ const ProductsIn2Columns = () => {
   }, [scrollYProgress]);
 
   return (
-    <div className="h-[600svh] grid grid-cols-12 relative">
+    <div className="h-[600svh] grid grid-cols-12 relative" ref={containerRef}>
       <div className="col-span-6 bg-black sticky top-0 h-[100svh]">
         <AnimatePresence presenceAffectsLayout={false}>
           <motion.div
-            key={products[currentIndex].modelName}
-            className="bg-red flex flex-col items-center justify-center text-right px-10 lg:px-20 absolute top-0 left-0 right-0 bottom-0 "
+            key={testimonials[currentIndex].quote}
+            className="flex flex-col items-center justify-center text-right px-10 lg:px-20 absolute top-0 left-0 right-0 bottom-0"
             transition={{ duration: 0.35 }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
           >
-            <div className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">
-              <span className="block text-right">
-                <span className="font-bold bg-white text-black px-2 mr-2 rounded-sm">
-                  modelo:
-                </span>
-                <span className="font-mono italic">
-                  {products[currentIndex].modelName}
-                </span>
-              </span>
-            </div>
+            <p className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-mono italic">
+              ❝
+              <br />
+              {testimonials[currentIndex].quote}
+              <br />❞
+            </p>
             <br />
             <br />
-            <p className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-mono">
-              {products[currentIndex].description}
+            <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl flex justify-end flex-col items-end font-mono  w-full">
+              {testimonials[currentIndex].name}
             </p>
           </motion.div>
         </AnimatePresence>
@@ -110,8 +76,8 @@ const ProductsIn2Columns = () => {
       <div className="col-span-6 bg-white sticky top-0 h-[100svh]">
         <AnimatePresence presenceAffectsLayout={false}>
           <motion.div
-            key={products[currentIndex].imageUrls[0]}
-            className="flex items-center justify-center absolute top-0 bottom-0 left-0 right-0"
+            key={testimonials[currentIndex].imageUrl}
+            className="flex items-center justify-center absolute top-0 bottom-0 left-0 right-0 grayscale"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -119,9 +85,9 @@ const ProductsIn2Columns = () => {
           >
             <div className="px-4 lg:px-10">
               <img
-                src={products[currentIndex].imageUrls[0]}
-                alt=""
-                className="w-full object-cover"
+                src={testimonials[currentIndex].imageUrl}
+                alt={testimonials[currentIndex].name}
+                className="w-96 h-96 rounded-full object-cover"
               />
             </div>
           </motion.div>
@@ -131,7 +97,7 @@ const ProductsIn2Columns = () => {
   );
 };
 
-const ProductsIn2Rows = () => {
+const TestimonialsIn2Rows = () => {
   const { scrollYProgress } = useScroll({
     offset: ["start start", "end start"],
   });
@@ -143,10 +109,8 @@ const ProductsIn2Rows = () => {
         setCurrentIndex(0);
       } else if (latest <= 3 / 5) {
         setCurrentIndex(1);
-      } else if (latest <= 4 / 5) {
-        setCurrentIndex(2);
       } else {
-        setCurrentIndex(3);
+        setCurrentIndex(2);
       }
     });
 
@@ -158,7 +122,7 @@ const ProductsIn2Rows = () => {
       <div className="sticky top-0 h-[20vh] bg-black">
         <AnimatePresence presenceAffectsLayout={false}>
           <motion.div
-            key={products[currentIndex].modelName}
+            key={testimonials[currentIndex].name}
             className="flex flex-col items-center justify-center absolute inset-0 px-10 lg:px-20"
             transition={{ duration: 0.35 }}
             initial={{ opacity: 0, y: 20 }}
@@ -167,25 +131,18 @@ const ProductsIn2Rows = () => {
           >
             <div className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">
               <span className="block text-center">
-                <span className="font-bold bg-white text-black px-2 mr-2 rounded-sm">
-                  modelo:
-                </span>
                 <span className="font-mono italic">
-                  {products[currentIndex].modelName}
+                  {testimonials[currentIndex].name}
                 </span>
               </span>
             </div>
-            <br />
-            <p className="text-xl mt-2 font-mono text-center md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl">
-              {products[currentIndex].description}
-            </p>
           </motion.div>
         </AnimatePresence>
       </div>
       <div className="sticky top-[20vh] h-[80vh] bg-white overflow-hidden">
         <AnimatePresence presenceAffectsLayout={false}>
           <motion.div
-            key={products[currentIndex].imageUrls[0]}
+            key={testimonials[currentIndex].imageUrl}
             className="flex items-center justify-center absolute inset-0"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -194,9 +151,9 @@ const ProductsIn2Rows = () => {
           >
             <div className="px-4">
               <img
-                src={products[currentIndex].imageUrls[0]}
-                alt=""
-                className="w-full object-cover"
+                src={testimonials[currentIndex].imageUrl}
+                alt={testimonials[currentIndex].name}
+                className="w-64 h-64 rounded-full object-cover"
               />
             </div>
           </motion.div>
@@ -226,20 +183,18 @@ const useOrientation = () => {
   return isPortrait;
 };
 
-export const Products = () => {
+export const SocialProof = () => {
   const isPortrait = useOrientation();
 
   useEffect(() => {
-    for (const product of products) {
-      for (const url of product.imageUrls) {
-        new Image().src = url;
-      }
+    for (const testimonial of testimonials) {
+      new Image().src = testimonial.imageUrl;
     }
   }, []);
 
   return (
-    <div className="bg-black text-white">
-      {isPortrait ? <ProductsIn2Rows /> : <ProductsIn2Columns />}
+    <div className="text-white bg-red-200">
+      {isPortrait ? <TestimonialsIn2Rows /> : <TestimonialsIn2Columns />}
     </div>
   );
 };
