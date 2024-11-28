@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import {
   AnimatePresence,
   motion,
@@ -56,10 +56,14 @@ const products = [
   },
 ];
 
-const ProductsIn2Columns = () => {
-  const index = 0;
+const ProductsIn2Columns = ({
+  scrollRef,
+}: {
+  scrollRef: RefObject<HTMLDivElement>;
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
+    container: scrollRef,
     target: containerRef,
     offset: ["start start", "end start"],
   });
@@ -67,11 +71,11 @@ const ProductsIn2Columns = () => {
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.on("change", (latest) => {
-      if (latest <= 2 / 5) {
+      if (latest <= 1 / 4) {
         setCurrentIndex(0);
-      } else if (latest <= 3 / 5) {
+      } else if (latest <= 2 / 4) {
         setCurrentIndex(1);
-      } else if (latest <= 4 / 5) {
+      } else if (latest <= 3 / 4) {
         setCurrentIndex(2);
       } else {
         setCurrentIndex(3);
@@ -82,7 +86,7 @@ const ProductsIn2Columns = () => {
   }, [scrollYProgress]);
 
   return (
-    <div className="h-[600svh] grid grid-cols-12 relative">
+    <div className="h-[600svh] grid grid-cols-12 relative" ref={containerRef}>
       <div className="col-span-6 bg-black sticky top-0 h-[100svh]">
         <AnimatePresence presenceAffectsLayout={false}>
           <motion.div
@@ -140,19 +144,27 @@ const ProductsIn2Columns = () => {
   );
 };
 
-const ProductsIn2Rows = () => {
+const ProductsIn2Rows = ({
+  scrollRef,
+}: {
+  scrollRef: RefObject<HTMLDivElement>;
+}) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
+    container: scrollRef,
+    target: containerRef,
     offset: ["start start", "end start"],
   });
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.on("change", (latest) => {
-      if (latest <= 2 / 5) {
+      console.log(latest);
+      if (latest <= 1 / 4) {
         setCurrentIndex(0);
-      } else if (latest <= 3 / 5) {
+      } else if (latest <= 2 / 4) {
         setCurrentIndex(1);
-      } else if (latest <= 4 / 5) {
+      } else if (latest <= 3 / 4) {
         setCurrentIndex(2);
       } else {
         setCurrentIndex(3);
@@ -163,7 +175,7 @@ const ProductsIn2Rows = () => {
   }, [scrollYProgress]);
 
   return (
-    <div className="h-[600svh] relative flex flex-col">
+    <div className="h-[600svh] relative flex flex-col" ref={containerRef}>
       <div className="sticky top-0 h-[20vh] bg-black">
         <AnimatePresence presenceAffectsLayout={false}>
           <motion.div
@@ -241,7 +253,7 @@ const useOrientation = () => {
 
 export const Products = () => {
   const isPortrait = useOrientation();
-
+  const wrapperRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     for (const product of products) {
       for (const url of product.imageUrls) {
@@ -251,8 +263,12 @@ export const Products = () => {
   }, []);
 
   return (
-    <div className="bg-black text-white">
-      {isPortrait ? <ProductsIn2Rows /> : <ProductsIn2Columns />}
+    <div id="wrapper" ref={wrapperRef} className="bg-black text-white">
+      {isPortrait ? (
+        <ProductsIn2Rows scrollRef={wrapperRef} />
+      ) : (
+        <ProductsIn2Columns scrollRef={wrapperRef} />
+      )}
     </div>
   );
 };

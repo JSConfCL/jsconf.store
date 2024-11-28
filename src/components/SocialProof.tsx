@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import {
   AnimatePresence,
   motion,
@@ -28,9 +28,14 @@ const testimonials = [
   },
 ];
 
-const TestimonialsIn2Columns = () => {
+const TestimonialsIn2Columns = ({
+  scrollRef,
+}: {
+  scrollRef: RefObject<HTMLDivElement>;
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
+    container: scrollRef,
     target: containerRef,
     offset: ["start start", "end start"],
   });
@@ -38,9 +43,9 @@ const TestimonialsIn2Columns = () => {
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.on("change", (latest) => {
-      if (latest <= 2 / 5) {
+      if (latest <= 1 / 3) {
         setCurrentIndex(0);
-      } else if (latest <= 3 / 5) {
+      } else if (latest <= 2 / 3) {
         setCurrentIndex(1);
       } else {
         setCurrentIndex(2);
@@ -51,7 +56,7 @@ const TestimonialsIn2Columns = () => {
   }, [scrollYProgress]);
 
   return (
-    <div className="h-[600svh] grid grid-cols-12 relative" ref={containerRef}>
+    <div className="h-[400svh] grid grid-cols-12 relative" ref={containerRef}>
       <div className="col-span-6 bg-black sticky top-0 h-[100svh]">
         <AnimatePresence presenceAffectsLayout={false}>
           <motion.div
@@ -96,7 +101,7 @@ const TestimonialsIn2Columns = () => {
               <img
                 src={testimonials[currentIndex].imageUrl}
                 alt={testimonials[currentIndex].name}
-                className="w-96 h-96 rounded-full object-cover"
+                className="max-w-80 max-h-80 w-full h-full rounded-full object-cover aspect-square"
               />
             </div>
           </motion.div>
@@ -106,17 +111,25 @@ const TestimonialsIn2Columns = () => {
   );
 };
 
-const TestimonialsIn2Rows = () => {
+const TestimonialsIn2Rows = ({
+  scrollRef,
+}: {
+  scrollRef: RefObject<HTMLDivElement>;
+}) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
+    container: scrollRef,
+    target: containerRef,
     offset: ["start start", "end start"],
   });
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.on("change", (latest) => {
-      if (latest <= 2 / 5) {
+      console.log(latest);
+      if (latest <= 1 / 3) {
         setCurrentIndex(0);
-      } else if (latest <= 3 / 5) {
+      } else if (latest <= 2 / 3) {
         setCurrentIndex(1);
       } else {
         setCurrentIndex(2);
@@ -126,9 +139,11 @@ const TestimonialsIn2Rows = () => {
     return () => unsubscribe();
   }, [scrollYProgress]);
 
+  console.log({ currentIndex });
+
   return (
-    <div className="h-[600svh] relative flex flex-col">
-      <div className="sticky top-0 h-[20vh] bg-black">
+    <div className="h-[400svh] relative flex flex-col" ref={containerRef}>
+      <div className="sticky top-0 h-[50vh] bg-black">
         <AnimatePresence presenceAffectsLayout={false}>
           <motion.div
             key={testimonials[currentIndex].name}
@@ -138,17 +153,24 @@ const TestimonialsIn2Rows = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
           >
-            <div className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">
-              <span className="block text-center">
-                <span className="font-mono italic">
-                  {testimonials[currentIndex].name}
-                </span>
+            <div className="block text-center font-mono italic">
+              <span className=" text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
+                ❝
+                <br />
+                {testimonials[currentIndex].quote}
+                <br />❞
+              </span>
+              <br />
+              <br />
+
+              <span className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">
+                {testimonials[currentIndex].name}
               </span>
             </div>
           </motion.div>
         </AnimatePresence>
       </div>
-      <div className="sticky top-[20vh] h-[80vh] bg-white overflow-hidden">
+      <div className="sticky top-[50vh] h-[50vh] bg-white overflow-hidden grayscale">
         <AnimatePresence presenceAffectsLayout={false}>
           <motion.div
             key={testimonials[currentIndex].imageUrl}
@@ -158,13 +180,11 @@ const TestimonialsIn2Rows = () => {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.35 }}
           >
-            <div className="px-4">
-              <img
-                src={testimonials[currentIndex].imageUrl}
-                alt={testimonials[currentIndex].name}
-                className="w-64 h-64 rounded-full object-cover"
-              />
-            </div>
+            <img
+              src={testimonials[currentIndex].imageUrl}
+              alt={testimonials[currentIndex].name}
+              className="w-[40%] aspect-square rounded-full object-cover"
+            />
           </motion.div>
         </AnimatePresence>
       </div>
@@ -194,6 +214,7 @@ const useOrientation = () => {
 
 export const SocialProof = () => {
   const isPortrait = useOrientation();
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     for (const testimonial of testimonials) {
@@ -202,8 +223,12 @@ export const SocialProof = () => {
   }, []);
 
   return (
-    <div className="text-white bg-red-200">
-      {isPortrait ? <TestimonialsIn2Rows /> : <TestimonialsIn2Columns />}
+    <div ref={wrapperRef} className="bg-black text-white">
+      {isPortrait ? (
+        <TestimonialsIn2Rows scrollRef={wrapperRef} />
+      ) : (
+        <TestimonialsIn2Columns scrollRef={wrapperRef} />
+      )}
     </div>
   );
 };
