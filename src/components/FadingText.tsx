@@ -1,4 +1,4 @@
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 export const FadingText = () => {
@@ -11,31 +11,31 @@ export const FadingText = () => {
 
   const firstTextOpacity = useTransform(
     scrollYProgress,
-    [0, 0.25, 0.26],
+    [0, 0.3, 0.31],
     [1, 1, 0.2]
   );
 
   const secondTextOpacity = useTransform(
     scrollYProgress,
-    [0, 0.25, 0.26, 0.5, 0.51],
+    [0, 0.3, 0.31, 0.4, 0.41],
     [0.2, 0.2, 1, 1, 0.2]
   );
 
   const thirdTextOpacity = useTransform(
     scrollYProgress,
-    [0, 0.5, 0.51, 0.75, 0.76],
+    [0, 0.4, 0.41, 0.6, 0.61],
     [0.2, 0.2, 1, 1, 0.2]
   );
 
   const fourthTextOpacity = useTransform(
     scrollYProgress,
-    [0, 0.75, 0.76, 1],
+    [0, 0.6, 0.61, 1],
     [0.2, 0.2, 1, 1]
   );
 
   return (
     <div className="bg-black text-white relative" ref={sectionRef}>
-      <div className="min-h-screen max-w-5xl px-10 lg:px-20 py-28 md:py-32 lg:py-36 flex flex-col justify-center items-center text-4xl md:text-6xl lg:text-5xl tracking-tight font-semibold">
+      <div className="min-h-screen max-w-5xl px-10 lg:px-20 pt-28 pb-36 md:py-32 md:py-42 lg:py-36 flex flex-col justify-center items-center text-4xl md:text-6xl lg:text-5xl tracking-tight font-semibold">
         <div className="leading-[1.15]">
           <motion.div
             className="transition-all duration-300"
@@ -78,6 +78,7 @@ export const FadingText = () => {
           fill="none"
           viewBox="0 0 32 32"
           className="w-12 h-12"
+          aria-hidden="true"
         >
           <path
             fill="#EEE"

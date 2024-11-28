@@ -1,17 +1,18 @@
 import { FadingText } from "./FadingText";
 import { Hero } from "./Hero";
 import { Products } from "./Products";
+import { frame, cancelFrame } from "framer-motion";
+import { ReactLenis, useLenis, type LenisRef } from "lenis/react";
 import { TextSection } from "./TextSection";
+import { useEffect, useRef } from "react";
 
 export const Application = () => {
   return (
-    <div
-    // className="h-[100svh] w-full flex justify-center items-center text-white text-5xl font-bold"
-    >
+    <ReactLenis root>
       <Hero />
       <TextSection />
       <FadingText />
       <Products />
-    </div>
+    </ReactLenis>
   );
 };

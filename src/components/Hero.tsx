@@ -1,4 +1,4 @@
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 export const Hero = () => {
@@ -19,6 +19,7 @@ export const Hero = () => {
       }}
     >
       <div className="absolute top-10 left-0 right-0 text-white flex flex-col items-center justify-center">
+        {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -33,7 +34,7 @@ export const Hero = () => {
           />
         </svg>
       </div>
-      <span className="text-8xl font-bold text-white font-mono">
+      <span className="text-8xl font-bold text-white font-mono drop-shadow-xl">
         jsconf
         <br />
         .store
