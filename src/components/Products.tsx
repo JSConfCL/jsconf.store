@@ -22,6 +22,7 @@ const products = [
     imageUrls: [
       "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/3e979acb-3e9d-43e3-2f8c-276f4b3dc000/default",
     ],
+    value: "$ 12 Lukas",
   },
   {
     modelName: "undefined is not a function",
@@ -30,6 +31,7 @@ const products = [
     imageUrls: [
       "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/89889d43-c367-4478-2996-aef9870d2100/default",
     ],
+    value: "$ 12 Lukas",
   },
   {
     modelName: 'console.log("pal frio")',
@@ -40,6 +42,7 @@ const products = [
       "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/9c839f57-94ac-4806-276f-1d37eac20700/default",
       "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/9c839f57-94ac-4806-276f-1d37eac20700/default",
     ],
+    value: "$ 22 Lukas",
   },
   // hat
   {
@@ -49,6 +52,7 @@ const products = [
     imageUrls: [
       "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/037a580b-3a53-49c0-75d2-0143379de700/default",
     ],
+    value: "$  7 Lukas",
   },
 ];
 
@@ -103,6 +107,11 @@ const ProductsIn2Columns = () => {
             <br />
             <p className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-mono">
               {products[currentIndex].description}
+            </p>
+            <br />
+            <br />
+            <p className="text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-right w-full">
+              {products[currentIndex].value}
             </p>
           </motion.div>
         </AnimatePresence>
@@ -178,6 +187,10 @@ const ProductsIn2Rows = () => {
             <br />
             <p className="text-xl mt-2 font-mono text-center md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl">
               {products[currentIndex].description}
+            </p>
+            <br />
+            <p className="text-xl mt-2 font-bold text-right w-full">
+              {products[currentIndex].value}
             </p>
           </motion.div>
         </AnimatePresence>
