@@ -47,8 +47,15 @@ const products = [
   // hat
   {
     modelName: "jav-HAT-script",
-    description:
-      "Protegete cuando el sol está HOT(reload). El complemento perfecto para 𝚕̶𝚘̶𝚜̶ ̶𝚍̶𝚒̶𝚊̶𝚜̶ ̶𝚍̶𝚎̶ ̶𝚙̶𝚒̶𝚜̶𝚌̶𝚒̶𝚗̶𝚊̶ cuando trabajas desde la casa.",
+    description: (
+      <>
+        Protegete cuando el sol está HOT(reload). El complemento perfecto para{" "}
+        <span className="line-through italic" style={{ fontSize: "0.8em" }}>
+          los dias de piscina
+        </span>{" "}
+        cuando trabajas desde la casa.
+      </>
+    ),
     imageUrls: [
       "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/037a580b-3a53-49c0-75d2-0143379de700/default",
     ],
@@ -197,11 +204,11 @@ const ProductsIn2Rows = ({
               </span>
             </div>
             <br />
-            <p className="text font-mono text-center">
+            <p className="text md:text-xl font-mono text-center">
               {products[currentIndex].description}
             </p>
             <br />
-            <p className="text mt-2 font-bold text-right w-full">
+            <p className="text md:text-2xl mt-2 font-bold text-right w-full">
               {products[currentIndex].value}
             </p>
           </motion.div>
