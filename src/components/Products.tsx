@@ -216,22 +216,24 @@ const ProductsIn2Rows = ({
       </div>
       <div className="sticky top-[30vh] h-[70vh] bg-white overflow-hidden">
         <AnimatePresence presenceAffectsLayout={false}>
-          <motion.div
-            key={products[currentIndex].imageUrls[0]}
-            className="flex items-center justify-center absolute inset-0"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.35 }}
-          >
-            <div className="px-4">
-              <img
-                src={products[currentIndex].imageUrls[0]}
-                alt=""
-                className="w-full object-cover"
-              />
-            </div>
-          </motion.div>
+          {products[currentIndex].imageUrls.map((url) => (
+            <motion.div
+              key={url}
+              className="flex items-center justify-center absolute inset-0"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.35 }}
+            >
+              <div className="px-4">
+                <img
+                  src={products[currentIndex].imageUrls[0]}
+                  alt=""
+                  className="w-full object-cover"
+                />
+              </div>
+            </motion.div>
+          ))}
         </AnimatePresence>
       </div>
     </div>

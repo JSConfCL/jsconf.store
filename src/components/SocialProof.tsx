@@ -16,15 +16,21 @@ const testimonials = [
 
   {
     name: "Ana — @uxanarangel",
-    quote: "Si se vende todo, hago un mega-livestream de 24 horas.",
+    quote: "Si se vende todo, hacemos un livestream de 2^8 horas.",
     imageUrl: "https://avatars.githubusercontent.com/u/30361612?v=4",
     link: "https://uxanarangel.com/",
   },
   {
     name: "Felipe — @fforres",
-    quote: "Oooh, el gorro weno",
+    quote: "Y no hay de React?",
     imageUrl: "https://avatars.githubusercontent.com/u/952992?v=4",
     link: "https://fforr.es",
+  },
+  {
+    name: "Miguel Duran — @midudev",
+    quote: "Quien eres tu! Que haces aquí?! Sal de mi casa!",
+    imageUrl: "https://avatars.githubusercontent.com/u/1561955?v=4",
+    link: "https://github.com/midudev",
   },
 ];
 
