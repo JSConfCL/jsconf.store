@@ -217,7 +217,7 @@ const ProductsIn2Rows = ({
           {products.map((el, index) => (
             <div
               key={el.modelName}
-              className={`w-full h-2 rounded-full ${index === currentIndex ? "bg-white" : "bg-white/50"}`}
+              className={`w-full h-0.5 rounded-full ${index === currentIndex ? "bg-white" : "bg-white/50"}`}
             />
           ))}
         </div>

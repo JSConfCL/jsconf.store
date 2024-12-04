@@ -202,7 +202,7 @@ const TestimonialsIn2Rows = ({
           {testimonials.map((el, index) => (
             <div
               key={el.name}
-              className={`w-full h-2 rounded-full ${index === currentIndex ? "bg-white" : "bg-white/50"}`}
+              className={`w-full h-0.5 rounded-full ${index === currentIndex ? "bg-white" : "bg-white/50"}`}
             />
           ))}
         </div>
