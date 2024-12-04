@@ -67,6 +67,7 @@ const ProductsIn2Columns = ({
   scrollRef: RefObject<HTMLDivElement>;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [showNavigation, setShowNavigation] = useState(false);
   const { scrollYProgress } = useScroll({
     container: scrollRef,
     target: containerRef,
@@ -76,6 +77,14 @@ const ProductsIn2Columns = ({
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.on("change", (latest) => {
+      if (latest >= 0.9) {
+        setShowNavigation(false);
+      } else if (latest === 0) {
+        setShowNavigation(false);
+      } else {
+        setShowNavigation(true);
+      }
+
       if (latest <= 1 / 4) {
         setCurrentIndex(0);
       } else if (latest <= 2 / 4) {
@@ -91,61 +100,78 @@ const ProductsIn2Columns = ({
   }, [scrollYProgress]);
 
   return (
-    <div className="h-[600svh] grid grid-cols-12 relative" ref={containerRef}>
-      <div className="col-span-6 bg-black sticky top-0 h-[100svh]">
-        <AnimatePresence presenceAffectsLayout={false}>
-          <motion.div
-            key={products[currentIndex].modelName}
-            className="bg-red flex flex-col items-center justify-center text-right px-10 lg:px-20 absolute top-0 left-0 right-0 bottom-0 "
-            transition={{ duration: 0.35 }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-          >
-            <div className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">
-              <span className="block text-right">
-                <span className="font-bold bg-white text-black px-2 mr-2 rounded-sm">
-                  modelo:
-                </span>
-                <span className="font-mono italic">
-                  {products[currentIndex].modelName}
-                </span>
-              </span>
-            </div>
-            <br />
-            <br />
-            <p className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-mono">
-              {products[currentIndex].description}
-            </p>
-            <br />
-            <br />
-            <p className="text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-right w-full">
-              {products[currentIndex].value}
-            </p>
-          </motion.div>
-        </AnimatePresence>
+    <>
+      <div
+        className={`fixed top-0 left-0 bottom-0 w-10 z-10 transition-all duration-300 flex justify-center items-center ${
+          showNavigation ? "opacity-100" : "opacity-0"
+        }`}
+        id="navigation"
+      >
+        <div className="h-1/2 w-full flex flex-col items-center justify-center gap-2 py-10">
+          {products.map((el, index) => (
+            <div
+              key={el.modelName}
+              className={`flex-1 w-[1px] rounded-full ${index === currentIndex ? "bg-white" : "bg-white/50"}`}
+            />
+          ))}
+        </div>
       </div>
-      <div className="col-span-6 bg-white sticky top-0 h-[100svh]">
-        <AnimatePresence presenceAffectsLayout={false}>
-          <motion.div
-            key={products[currentIndex].imageUrls[0]}
-            className="flex items-center justify-center absolute top-0 bottom-0 left-0 right-0"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.35 }}
-          >
-            <div className="px-4 lg:px-10">
-              <img
-                src={products[currentIndex].imageUrls[0]}
-                alt=""
-                className="w-full object-cover"
-              />
-            </div>
-          </motion.div>
-        </AnimatePresence>
+      <div className="h-[600svh] grid grid-cols-12 relative" ref={containerRef}>
+        <div className="col-span-6 bg-black sticky top-0 h-[100svh]">
+          <AnimatePresence presenceAffectsLayout={false}>
+            <motion.div
+              key={products[currentIndex].modelName}
+              className="bg-red flex flex-col items-center justify-center text-right px-10 lg:px-20 absolute top-0 left-0 right-0 bottom-0 "
+              transition={{ duration: 0.35 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+            >
+              <div className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">
+                <span className="block text-right">
+                  <span className="font-bold bg-white text-black px-2 mr-2 rounded-sm">
+                    modelo:
+                  </span>
+                  <span className="font-mono italic">
+                    {products[currentIndex].modelName}
+                  </span>
+                </span>
+              </div>
+              <br />
+              <br />
+              <p className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-mono">
+                {products[currentIndex].description}
+              </p>
+              <br />
+              <br />
+              <p className="text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-right w-full">
+                {products[currentIndex].value}
+              </p>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        <div className="col-span-6 bg-white sticky top-0 h-[100svh]">
+          <AnimatePresence presenceAffectsLayout={false}>
+            <motion.div
+              key={products[currentIndex].imageUrls[0]}
+              className="flex items-center justify-center absolute top-0 bottom-0 left-0 right-0"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.35 }}
+            >
+              <div className="px-4 lg:px-10">
+                <img
+                  src={products[currentIndex].imageUrls[0]}
+                  alt=""
+                  className="w-full object-cover"
+                />
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -155,6 +181,7 @@ const ProductsIn2Rows = ({
   scrollRef: RefObject<HTMLDivElement>;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [showNavigation, setShowNavigation] = useState(false);
   const { scrollYProgress } = useScroll({
     container: scrollRef,
     target: containerRef,
@@ -164,12 +191,18 @@ const ProductsIn2Rows = ({
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.on("change", (latest) => {
-      console.log(latest);
-      if (latest <= 1 / 4) {
+      if (latest >= 0.9) {
+        setShowNavigation(false);
+      } else if (latest === 0) {
+        setShowNavigation(false);
+      } else {
+        setShowNavigation(true);
+      }
+      if (latest <= 1 / 5) {
         setCurrentIndex(0);
-      } else if (latest <= 2 / 4) {
+      } else if (latest <= 2 / 5) {
         setCurrentIndex(1);
-      } else if (latest <= 3 / 4) {
+      } else if (latest <= 3 / 5) {
         setCurrentIndex(2);
       } else {
         setCurrentIndex(3);
@@ -180,59 +213,76 @@ const ProductsIn2Rows = ({
   }, [scrollYProgress]);
 
   return (
-    <div className="h-[600svh] relative flex flex-col" ref={containerRef}>
-      <div className="sticky top-0 h-[30vh] bg-black">
-        <AnimatePresence presenceAffectsLayout={false}>
-          <motion.div
-            key={products[currentIndex].modelName}
-            className="flex flex-col items-center justify-center absolute inset-0 px-5 lg:px-20"
-            transition={{ duration: 0.35 }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-          >
-            <div className="text  md:text-lg">
-              <span className="block text-center">
-                <span className="font-bold bg-white text-black px-2 mr-2 rounded-sm">
-                  modelo:
-                </span>
-                <span className="font-mono italic">
-                  {products[currentIndex].modelName}
-                </span>
-              </span>
-            </div>
-            <br />
-            <p className="text md:text-xl font-mono text-center">
-              {products[currentIndex].description}
-            </p>
-            <br />
-            <p className="text md:text-2xl mt-2 font-bold text-right w-full">
-              {products[currentIndex].value}
-            </p>
-          </motion.div>
-        </AnimatePresence>
+    <>
+      <div
+        className={`fixed top-0 left-0 right-0 h-10 z-10 ${
+          showNavigation ? "opacity-100" : "opacity-0"
+        }`}
+        id="navigation"
+      >
+        <div className="h-full w-full flex items-center justify-center gap-2 px-10">
+          {products.map((el, index) => (
+            <div
+              key={el.modelName}
+              className={`w-full h-2 rounded-full ${index === currentIndex ? "bg-white" : "bg-white/50"}`}
+            />
+          ))}
+        </div>
       </div>
-      <div className="sticky top-[30vh] h-[70vh] bg-white overflow-hidden">
-        <AnimatePresence presenceAffectsLayout={false}>
-          <motion.div
-            key={products[currentIndex].imageUrls[0]}
-            className="flex items-center justify-center absolute inset-0"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.35 }}
-          >
-            <div className="px-4">
-              <img
-                src={products[currentIndex].imageUrls[0]}
-                alt=""
-                className="w-full object-cover"
-              />
-            </div>
-          </motion.div>
-        </AnimatePresence>
+      <div className="h-[600svh] relative flex flex-col" ref={containerRef}>
+        <div className="sticky top-0 h-[30vh] bg-black">
+          <AnimatePresence presenceAffectsLayout={false}>
+            <motion.div
+              key={products[currentIndex].modelName}
+              className="flex flex-col items-center justify-center absolute inset-0 px-5 lg:px-20"
+              transition={{ duration: 0.35 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+            >
+              <div className="text  md:text-lg">
+                <span className="block text-center">
+                  <span className="font-bold bg-white text-black px-2 mr-2 rounded-sm">
+                    modelo:
+                  </span>
+                  <span className="font-mono italic">
+                    {products[currentIndex].modelName}
+                  </span>
+                </span>
+              </div>
+              <br />
+              <p className="text md:text-xl font-mono text-center">
+                {products[currentIndex].description}
+              </p>
+              <br />
+              <p className="text md:text-2xl mt-2 font-bold text-right w-full">
+                {products[currentIndex].value}
+              </p>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        <div className="sticky top-[30vh] h-[70vh] bg-white overflow-hidden">
+          <AnimatePresence presenceAffectsLayout={false}>
+            <motion.div
+              key={products[currentIndex].imageUrls[0]}
+              className="flex items-center justify-center absolute inset-0"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.35 }}
+            >
+              <div className="px-4">
+                <img
+                  src={products[currentIndex].imageUrls[0]}
+                  alt=""
+                  className="w-full object-cover"
+                />
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -268,7 +318,7 @@ export const Products = () => {
   }, []);
 
   return (
-    <div id="wrapper" ref={wrapperRef} className="bg-black text-white">
+    <div id="wrapper" ref={wrapperRef} className="bg-black text-white relative">
       {isPortrait ? (
         <ProductsIn2Rows scrollRef={wrapperRef} />
       ) : (

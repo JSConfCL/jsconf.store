@@ -4,6 +4,7 @@ import {
   motion,
   type MotionValue,
   useScroll,
+  useTransform,
 } from "framer-motion";
 
 const testimonials = [
@@ -41,89 +42,116 @@ const testimonials = [
   },
 ];
 
-const useCalculateCurrentIndex = (scrollYProgress: MotionValue<number>) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const length = testimonials.length;
-
-  useEffect(() => {
-    const unsubscribe = scrollYProgress.on("change", (latest) => {
-      const dynamicIndex = Math.floor(latest * length);
-      if (dynamicIndex >= 0 && dynamicIndex < length) {
-        setCurrentIndex(dynamicIndex);
-      }
-    });
-
-    return () => unsubscribe();
-  }, [scrollYProgress, length]);
-
-  return currentIndex;
-};
-
 const TestimonialsIn2Columns = ({
   scrollRef,
 }: {
   scrollRef: RefObject<HTMLDivElement>;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [showNavigation, setShowNavigation] = useState(false);
   const { scrollYProgress } = useScroll({
     container: scrollRef,
     target: containerRef,
     offset: ["start start", "end start"],
   });
-  const currentIndex = useCalculateCurrentIndex(scrollYProgress);
+
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on("change", (latest) => {
+      if (latest >= 0.9) {
+        setShowNavigation(false);
+      } else if (latest === 0) {
+        setShowNavigation(false);
+      } else {
+        setShowNavigation(true);
+      }
+      if (latest <= 1 / 6) {
+        setCurrentIndex(0);
+      } else if (latest <= 2 / 6) {
+        setCurrentIndex(1);
+      } else if (latest <= 3 / 6) {
+        setCurrentIndex(2);
+      } else if (latest <= 4 / 6) {
+        setCurrentIndex(3);
+      } else if (latest <= 5 / 6) {
+        setCurrentIndex(4);
+      } else {
+        setCurrentIndex(4);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [scrollYProgress]);
   return (
-    <div className="h-[500svh] grid grid-cols-12 relative" ref={containerRef}>
-      <div className="col-span-6 bg-black sticky top-0 h-[100svh]">
-        <AnimatePresence presenceAffectsLayout={false}>
-          <motion.div
-            key={testimonials[currentIndex].quote}
-            className="flex flex-col items-center justify-center text-right px-10 lg:px-20 absolute top-0 left-0 right-0 bottom-0"
-            transition={{ duration: 0.35 }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-          >
-            <p className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-mono italic">
-              ❝
+    <>
+      <div
+        className={`fixed top-0 left-0 bottom-0 w-10 z-10 transition-all duration-300 flex justify-center items-center ${
+          showNavigation ? "opacity-100" : "opacity-0"
+        }`}
+        id="navigation"
+      >
+        <div className="h-1/2 w-full flex flex-col items-center justify-center gap-2 py-10">
+          {testimonials.map((el, index) => (
+            <div
+              key={el.name}
+              className={`flex-1 w-[1px] rounded-full ${index === currentIndex ? "bg-white" : "bg-white/50"}`}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="h-[800svh] grid grid-cols-12 relative" ref={containerRef}>
+        <div className="col-span-6 bg-black sticky top-0 h-[100svh]">
+          <AnimatePresence presenceAffectsLayout={false}>
+            <motion.div
+              key={testimonials[currentIndex].quote}
+              className="flex flex-col items-center justify-center text-right px-10 lg:px-20 absolute top-0 left-0 right-0 bottom-0"
+              transition={{ duration: 0.35 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+            >
+              <p className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-mono italic">
+                ❝
+                <br />
+                {testimonials[currentIndex].quote}
+                <br />❞
+              </p>
               <br />
-              {testimonials[currentIndex].quote}
-              <br />❞
-            </p>
-            <br />
-            <br />
-            <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl flex justify-end flex-col items-end font-mono  w-full">
-              <a
-                href={testimonials[currentIndex].link}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {testimonials[currentIndex].name}
-              </a>
-            </p>
-          </motion.div>
-        </AnimatePresence>
+              <br />
+              <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl flex justify-end flex-col items-end font-mono  w-full">
+                <a
+                  href={testimonials[currentIndex].link}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {testimonials[currentIndex].name}
+                </a>
+              </p>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        <div className="col-span-6 bg-white sticky top-0 h-[100svh]">
+          <AnimatePresence presenceAffectsLayout={false}>
+            <motion.div
+              key={testimonials[currentIndex].imageUrl}
+              className="flex items-center justify-center absolute top-0 bottom-0 left-0 right-0 grayscale"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.35 }}
+            >
+              <div className="px-4 lg:px-10">
+                <img
+                  src={testimonials[currentIndex].imageUrl}
+                  alt={testimonials[currentIndex].name}
+                  className="max-w-80 max-h-80 w-full h-full rounded-full object-cover aspect-square"
+                />
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
-      <div className="col-span-6 bg-white sticky top-0 h-[100svh]">
-        <AnimatePresence presenceAffectsLayout={false}>
-          <motion.div
-            key={testimonials[currentIndex].imageUrl}
-            className="flex items-center justify-center absolute top-0 bottom-0 left-0 right-0 grayscale"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.35 }}
-          >
-            <div className="px-4 lg:px-10">
-              <img
-                src={testimonials[currentIndex].imageUrl}
-                alt={testimonials[currentIndex].name}
-                className="max-w-80 max-h-80 w-full h-full rounded-full object-cover aspect-square"
-              />
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-    </div>
+    </>
   );
 };
 
@@ -133,61 +161,106 @@ const TestimonialsIn2Rows = ({
   scrollRef: RefObject<HTMLDivElement>;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [showNavigation, setShowNavigation] = useState(false);
   const { scrollYProgress } = useScroll({
     container: scrollRef,
     target: containerRef,
     offset: ["start start", "end start"],
   });
-  const currentIndex = useCalculateCurrentIndex(scrollYProgress);
+
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on("change", (latest) => {
+      if (latest >= 0.9) {
+        setShowNavigation(false);
+      } else if (latest === 0) {
+        setShowNavigation(false);
+      } else {
+        setShowNavigation(true);
+      }
+      if (latest <= 1 / 6) {
+        setCurrentIndex(0);
+      } else if (latest <= 2 / 6) {
+        setCurrentIndex(1);
+      } else if (latest <= 3 / 6) {
+        setCurrentIndex(2);
+      } else if (latest <= 4 / 6) {
+        setCurrentIndex(3);
+      } else if (latest <= 5 / 6) {
+        setCurrentIndex(4);
+      } else {
+        setCurrentIndex(4);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [scrollYProgress]);
 
   return (
-    <div className="h-[500svh] relative flex flex-col" ref={containerRef}>
-      <div className="sticky top-0 h-[50vh] bg-black">
-        <AnimatePresence presenceAffectsLayout={false}>
-          <motion.div
-            key={testimonials[currentIndex].name}
-            className="flex flex-col items-center justify-center absolute inset-0 px-10 lg:px-20"
-            transition={{ duration: 0.35 }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-          >
-            <div className="block text-center font-mono italic">
-              <span className=" text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
-                ❝
-                <br />
-                {testimonials[currentIndex].quote}
-                <br />❞
-              </span>
-              <br />
-              <br />
-
-              <span className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">
-                {testimonials[currentIndex].name}
-              </span>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-      <div className="sticky top-[50vh] h-[50vh] bg-white overflow-hidden grayscale">
-        <AnimatePresence presenceAffectsLayout={false}>
-          <motion.div
-            key={testimonials[currentIndex].imageUrl}
-            className="flex items-center justify-center absolute inset-0"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.35 }}
-          >
-            <img
-              src={testimonials[currentIndex].imageUrl}
-              alt={testimonials[currentIndex].name}
-              className="w-[40%] aspect-square rounded-full object-cover"
+    <>
+      <div
+        className={`fixed top-0 left-0 right-0 h-10 z-10 ${
+          showNavigation ? "opacity-100" : "opacity-0"
+        }`}
+        id="navigation"
+      >
+        <div className="h-full w-full flex items-center justify-center gap-2 px-10">
+          {testimonials.map((el, index) => (
+            <div
+              key={el.name}
+              className={`w-full h-2 rounded-full ${index === currentIndex ? "bg-white" : "bg-white/50"}`}
             />
-          </motion.div>
-        </AnimatePresence>
+          ))}
+        </div>
       </div>
-    </div>
+      <div className="h-[800svh] relative flex flex-col" ref={containerRef}>
+        <div className="sticky top-0 h-[50vh] bg-black">
+          <AnimatePresence presenceAffectsLayout={false}>
+            <motion.div
+              key={testimonials[currentIndex].name}
+              className="flex flex-col items-center justify-center absolute inset-0 px-10 lg:px-20"
+              transition={{ duration: 0.35 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+            >
+              <div className="block text-center font-mono italic">
+                <span className=" text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
+                  ❝
+                  <br />
+                  {testimonials[currentIndex].quote}
+                  <br />❞
+                </span>
+                <br />
+                <br />
+
+                <span className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">
+                  {testimonials[currentIndex].name}
+                </span>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        <div className="sticky top-[50vh] h-[50vh] bg-white overflow-hidden grayscale">
+          <AnimatePresence presenceAffectsLayout={false}>
+            <motion.div
+              key={testimonials[currentIndex].imageUrl}
+              className="flex items-center justify-center absolute inset-0"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.35 }}
+            >
+              <img
+                src={testimonials[currentIndex].imageUrl}
+                alt={testimonials[currentIndex].name}
+                className="w-[40%] aspect-square rounded-full object-cover"
+              />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+    </>
   );
 };
 

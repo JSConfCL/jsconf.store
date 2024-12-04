@@ -23,20 +23,20 @@ export const FadingText = () => {
 
   const thirdTextOpacity = useTransform(
     scrollYProgress,
-    [0, 0.4, 0.41, 0.6, 0.61],
+    [0, 0.4, 0.41, 0.55, 0.56],
     [0.2, 0.2, 1, 1, 0.2]
   );
 
   const fourthTextOpacity = useTransform(
     scrollYProgress,
-    [0, 0.6, 0.61, 1],
+    [0, 0.56, 0.57, 1],
     [0.2, 0.2, 1, 1]
   );
 
   return (
     <div className="bg-black text-white relative" ref={sectionRef}>
       <div className="min-h-screen max-w-5xl px-10 lg:px-20 pt-28 pb-36 md:py-32 md:py-42 lg:py-36 flex flex-col justify-center items-center text-4xl md:text-6xl lg:text-5xl tracking-tight font-semibold">
-        <div className="leading-[1.15]">
+        <div className="leading-[1.2] md:leading-[1.15] flex flex-col gap-24 lg:gap-16">
           <motion.div
             className="transition-all duration-300"
             style={{ opacity: firstTextOpacity }}
@@ -51,8 +51,6 @@ export const FadingText = () => {
             Haces posible el evento de tecnología — hecho por voluntarios — más
             grande de todo Chile.
           </motion.span>
-          <br />
-          <br />
           <motion.span
             className="transition-all duration-300 inline-block after:content-['_']"
             style={{ opacity: thirdTextOpacity }}
@@ -61,14 +59,12 @@ export const FadingText = () => {
             TechSchool, meetups y workshops gratuitos que benefician a miles de
             personas.
           </motion.span>
-          <br />
-          <br />
           <motion.span
             className="transition-all duration-300 inline-block"
             style={{ opacity: fourthTextOpacity }}
           >
-            <b>Te llevas Algo Especial</b> — Obtienes un de edición limitada,
-            diseñados exclusivamente para la comunidad tech de Chile.
+            <b>Te llevas Algo Especial</b> — Obtienes un producto de edición
+            limitada, diseñados exclusivamente para la comunidad tech de Chile.
           </motion.span>
         </div>
       </div>
