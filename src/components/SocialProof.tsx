@@ -1,11 +1,5 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
-import {
-  AnimatePresence,
-  motion,
-  type MotionValue,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+import { AnimatePresence, motion, useScroll } from "framer-motion";
 
 const testimonials = [
   {
@@ -297,9 +291,9 @@ export const SocialProof = () => {
   return (
     <div ref={wrapperRef} className="bg-black text-white">
       {isPortrait ? (
-        <TestimonialsIn2Rows scrollRef={wrapperRef} />
+        <TestimonialsIn2Rows key={"key1"} scrollRef={wrapperRef} />
       ) : (
-        <TestimonialsIn2Columns scrollRef={wrapperRef} />
+        <TestimonialsIn2Columns key={"key2"} scrollRef={wrapperRef} />
       )}
     </div>
   );

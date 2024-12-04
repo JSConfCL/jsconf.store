@@ -1,12 +1,5 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
-import {
-  AnimatePresence,
-  motion,
-  useInView,
-  useScroll,
-  useTransform,
-} from "framer-motion";
-import { useRect } from "@darkroom.engineering/hamo";
+import { AnimatePresence, motion, useScroll } from "framer-motion";
 
 interface ProductSectionProps {
   modelName: string;
@@ -320,9 +313,9 @@ export const Products = () => {
   return (
     <div id="wrapper" ref={wrapperRef} className="bg-black text-white relative">
       {isPortrait ? (
-        <ProductsIn2Rows scrollRef={wrapperRef} />
+        <ProductsIn2Rows key={"key1"} scrollRef={wrapperRef} />
       ) : (
-        <ProductsIn2Columns scrollRef={wrapperRef} />
+        <ProductsIn2Columns key={"key2"} scrollRef={wrapperRef} />
       )}
     </div>
   );
