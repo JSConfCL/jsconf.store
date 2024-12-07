@@ -34,7 +34,7 @@ const products = [
     imageUrls: [
       "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/7ebd4672-aff5-4066-8677-d836a4cfa500/default",
     ],
-    value: "$ 18 Lukas",
+    value: "$ 20 Lukas",
   },
   {
     id: 1,
