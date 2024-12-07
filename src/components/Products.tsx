@@ -9,16 +9,6 @@ interface ProductSectionProps {
 
 const products = [
   {
-    id: 1,
-    modelName: "[Object object] — 2024",
-    description:
-      "La polera oficial de la JSConf Chile 2024! Perfecta para sesiones de programación o para mostrar tu amor por el desarrollo web.",
-    imageUrls: [
-      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/63ac9ddb-283a-424e-0767-f4e487120400/default",
-    ],
-    value: "$ 11 Lukas",
-  },
-  {
     id: 2,
     modelName: "De(sk)bugger",
     description:
@@ -26,19 +16,8 @@ const products = [
     imageUrls: [
       "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/ec03e5f8-b1e1-449a-62d9-8952a0e27300/default",
     ],
-    value: "$ ??? Lukas",
+    value: "$ 14 Lukas",
   },
-  {
-    id: 3,
-    modelName: 'console.log("este es pal frio")',
-    description:
-      "Acogedor como JQuery, y que te envuelve como un closure. Este polerón es ideal para aquellas sesiones de programación en invierno.",
-    imageUrls: [
-      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/88698d55-8831-41b2-980e-fa958d057f00/default",
-    ],
-    value: "$ 32 Lukas",
-  },
-  // hat
   {
     id: 4,
     modelName: "H2-OS — (CommunityOS Edition)",
@@ -53,9 +32,19 @@ const products = [
       </>
     ),
     imageUrls: [
-      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/037a580b-3a53-49c0-75d2-0143379de700/default",
+      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/7ebd4672-aff5-4066-8677-d836a4cfa500/default",
     ],
-    value: "$ 15 Lukas",
+    value: "$ 18 Lukas",
+  },
+  {
+    id: 1,
+    modelName: "undefined is not a pin",
+    description:
+      "Cuélgalo en tu mochila, en tu lanyard, gorro, o pontelo de aro! El pin de JSConf Chile 2024 es el complemento perfecto para cualquier evento de programación.",
+    imageUrls: [
+      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/1ead26c5-cfbd-4afc-cc20-739e79b40800/default",
+    ],
+    value: "$ 3 Lukas",
   },
 ];
 
@@ -82,15 +71,14 @@ const ProductsIn2Columns = ({
       } else {
         setShowNavigation(true);
       }
+      const productCount = products.length;
+      const sectionSize = 1 / productCount;
 
-      if (latest <= 1 / 4) {
-        setCurrentIndex(0);
-      } else if (latest <= 2 / 4) {
-        setCurrentIndex(1);
-      } else if (latest <= 3 / 4) {
-        setCurrentIndex(2);
-      } else {
-        setCurrentIndex(3);
+      for (let i = 0; i < productCount; i++) {
+        if (latest <= (i + 1) * sectionSize) {
+          setCurrentIndex(i);
+          break;
+        }
       }
     });
 
@@ -196,14 +184,14 @@ const ProductsIn2Rows = ({
       } else {
         setShowNavigation(true);
       }
-      if (latest <= 1 / 5) {
-        setCurrentIndex(0);
-      } else if (latest <= 2 / 5) {
-        setCurrentIndex(1);
-      } else if (latest <= 3 / 5) {
-        setCurrentIndex(2);
-      } else {
-        setCurrentIndex(3);
+      const productCount = products.length;
+      const sectionSize = 1 / productCount;
+
+      for (let i = 0; i < productCount; i++) {
+        if (latest <= (i + 1) * sectionSize) {
+          setCurrentIndex(i);
+          break;
+        }
       }
     });
 
