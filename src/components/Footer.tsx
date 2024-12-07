@@ -35,9 +35,12 @@ export const Footer = () => {
             .store
           </motion.div>
         </span>
-        <span className="text-white text-sm font-semibold font-mono">
-          a project by jsconf.cl
-        </span>
+        <a
+          href="https://github.com/JSConfCL/jsconf.store"
+          className="text-white text-sm font-semibold font-mono underline"
+        >
+          an opensource project by jsconf.cl ↗
+        </a>
       </div>
     </footer>
   );
