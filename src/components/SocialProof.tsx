@@ -9,16 +9,16 @@ const testimonials = [
     link: "https://github.com/diruzcode",
   },
 
-  {
-    name: "Ana — @uxanarangel",
-    quote: "Si se vende todo, hacemos un livestream de 2^8 horas.",
-    imageUrl: "https://avatars.githubusercontent.com/u/30361612?v=4",
-    link: "https://uxanarangel.com/",
-  },
+  // {
+  //   name: "Ana — @uxanarangel",
+  //   quote: "Con este deskpad un livestream de 2^8 horas.",
+  //   imageUrl: "https://avatars.githubusercontent.com/u/30361612?v=4",
+  //   link: "https://uxanarangel.com/",
+  // },
   {
     name: "Joel — @DezkaReid",
     quote:
-      "Si tengo que elegir entre el one piece, y el gorro de la jsconf?... el gorro.",
+      "Si tengo que elegir entre el one piece, y el deskpad de la jsconf?... el deskpad.",
     imageUrl: "https://avatars.githubusercontent.com/u/1269896?v=4",
     link: "https://x.com/dezkareid",
   },
@@ -30,7 +30,15 @@ const testimonials = [
   },
   {
     name: "Miguel Duran — @Midudev",
-    quote: "Quien eres tu! Que haces aquí?! Sal de mi casa!",
+    quote: (
+      <>
+        Quién eres tu!
+        <br />
+        Qué haces aquí?!
+        <br />
+        Sal de mi casa!!
+      </>
+    ),
     imageUrl: "https://avatars.githubusercontent.com/u/1561955?v=4",
     link: "https://github.com/midudev",
   },
@@ -59,19 +67,16 @@ const TestimonialsIn2Columns = ({
       } else {
         setShowNavigation(true);
       }
-      if (latest <= 1 / 6) {
-        setCurrentIndex(0);
-      } else if (latest <= 2 / 6) {
-        setCurrentIndex(1);
-      } else if (latest <= 3 / 6) {
-        setCurrentIndex(2);
-      } else if (latest <= 4 / 6) {
-        setCurrentIndex(3);
-      } else if (latest <= 5 / 6) {
-        setCurrentIndex(4);
-      } else {
-        setCurrentIndex(4);
-      }
+      const numTestimonials = testimonials.length;
+      const sectionSize = 1 / numTestimonials;
+
+      // Find which section we're in based on scroll progress
+      const sectionIndex = Math.min(
+        Math.floor(latest / sectionSize),
+        numTestimonials - 1
+      );
+
+      setCurrentIndex(sectionIndex);
     });
 
     return () => unsubscribe();
@@ -97,7 +102,7 @@ const TestimonialsIn2Columns = ({
         <div className="col-span-6 bg-black sticky top-0 h-[100svh]">
           <AnimatePresence presenceAffectsLayout={false}>
             <motion.div
-              key={testimonials[currentIndex].quote}
+              key={testimonials[currentIndex].name}
               className="flex flex-col items-center justify-center text-right px-10 lg:px-20 absolute top-0 left-0 right-0 bottom-0"
               transition={{ duration: 0.35 }}
               initial={{ opacity: 0, y: 20 }}
@@ -172,19 +177,16 @@ const TestimonialsIn2Rows = ({
       } else {
         setShowNavigation(true);
       }
-      if (latest <= 1 / 6) {
-        setCurrentIndex(0);
-      } else if (latest <= 2 / 6) {
-        setCurrentIndex(1);
-      } else if (latest <= 3 / 6) {
-        setCurrentIndex(2);
-      } else if (latest <= 4 / 6) {
-        setCurrentIndex(3);
-      } else if (latest <= 5 / 6) {
-        setCurrentIndex(4);
-      } else {
-        setCurrentIndex(4);
-      }
+      const numTestimonials = testimonials.length;
+      const sectionSize = 1 / numTestimonials;
+
+      // Find which section we're in based on scroll progress
+      const sectionIndex = Math.min(
+        Math.floor(latest / sectionSize),
+        numTestimonials - 1
+      );
+
+      setCurrentIndex(sectionIndex);
     });
 
     return () => unsubscribe();

@@ -24,8 +24,10 @@ export const HowToBuy = () => {
         </div>
         <br />
         <br />
+        <br />
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center font-mono">
-          5 y 6 de Dic <br /> en JSConf Chile
+          <span className="block leading-relaxed">Solo el 6/12/2025</span>
+          <span className="block leading-relaxed">en JSConf Chile</span>
         </h2>
         <br />
         <br />

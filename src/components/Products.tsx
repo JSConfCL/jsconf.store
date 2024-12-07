@@ -9,38 +9,43 @@ interface ProductSectionProps {
 
 const products = [
   {
-    modelName: "[Object object]",
+    id: 1,
+    modelName: "[Object object] — 2024",
     description:
-      "Inspirada en la JSConf. Perfecta para sesiones de programación o para mostrar tu amor por el desarrollo web.",
+      "La polera oficial de la JSConf Chile 2024! Perfecta para sesiones de programación o para mostrar tu amor por el desarrollo web.",
     imageUrls: [
-      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/3e979acb-3e9d-43e3-2f8c-276f4b3dc000/default",
+      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/63ac9ddb-283a-424e-0767-f4e487120400/default",
     ],
-    value: "$ 12 Lukas",
+    value: "$ 11 Lukas",
   },
   {
-    modelName: "undefined is not a function",
+    id: 2,
+    modelName: "De(sk)bugger",
     description:
-      "Un diseño impredecible como un 'undefined', confuso como el 'this', pero que al final hace sentido... como JavaScript.",
+      "Un diseño hermosamente caótico como el 'this', inesperado como un 'undefined is not a function', pero que al final hace sentido... como JavaScript 💛.",
     imageUrls: [
-      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/89889d43-c367-4478-2996-aef9870d2100/default",
+      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/9345ef87-8bea-4203-18cb-6f17a877b900/default",
     ],
-    value: "$ 12 Lukas",
+    value: "$ ??? Lukas",
   },
   {
-    modelName: 'console.log("pal frio")',
+    id: 3,
+    modelName: 'console.log("este es pal frio")',
     description:
-      "Un polerón acogedor que te envuelve como un closure. Ideal para esas sesiones de programación en invierno.",
+      "Acogedor como JQuery, y que te envuelve como un closure. Este polerón es ideal para aquellas sesiones de programación en invierno.",
     imageUrls: [
-      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/9c839f57-94ac-4806-276f-1d37eac20700/default",
+      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/88698d55-8831-41b2-980e-fa958d057f00/default",
     ],
-    value: "$ 22 Lukas",
+    value: "$ 32 Lukas",
   },
   // hat
   {
-    modelName: "jav-HAT-script",
+    id: 4,
+    modelName: "H2-OS — (CommunityOS Edition)",
     description: (
       <>
-        Protegete cuando el sol está HOT(reload). El complemento perfecto para{" "}
+        Hidrátate cuando el sol está HOT(reload). Llenalo de agua o café. El
+        complemento perfecto para{" "}
         <span className="line-through italic" style={{ fontSize: "0.8em" }}>
           los dias de piscina
         </span>{" "}
@@ -50,7 +55,7 @@ const products = [
     imageUrls: [
       "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/037a580b-3a53-49c0-75d2-0143379de700/default",
     ],
-    value: "$  7 Lukas",
+    value: "$ 15 Lukas",
   },
 ];
 
@@ -103,7 +108,7 @@ const ProductsIn2Columns = ({
         <div className="h-1/2 w-full flex flex-col items-center justify-center gap-2 py-10">
           {products.map((el, index) => (
             <div
-              key={el.modelName}
+              key={el.id}
               className={`flex-1 w-[1px] rounded-full ${index === currentIndex ? "bg-white" : "bg-white/50"}`}
             />
           ))}
@@ -113,7 +118,7 @@ const ProductsIn2Columns = ({
         <div className="col-span-6 bg-black sticky top-0 h-[100svh]">
           <AnimatePresence presenceAffectsLayout={false}>
             <motion.div
-              key={products[currentIndex].modelName}
+              key={products[currentIndex].id}
               className="bg-red flex flex-col items-center justify-center text-right px-10 lg:px-20 absolute top-0 left-0 right-0 bottom-0 "
               transition={{ duration: 0.35 }}
               initial={{ opacity: 0, y: 20 }}
@@ -146,7 +151,7 @@ const ProductsIn2Columns = ({
         <div className="col-span-6 bg-white sticky top-0 h-[100svh]">
           <AnimatePresence presenceAffectsLayout={false}>
             <motion.div
-              key={products[currentIndex].imageUrls[0]}
+              key={products[currentIndex].id}
               className="flex items-center justify-center absolute top-0 bottom-0 left-0 right-0"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
