@@ -22,9 +22,9 @@ const products = [
     id: 2,
     modelName: "De(sk)bugger",
     description:
-      "Un diseño hermosamente caótico como el 'this', inesperado como un 'undefined is not a function', pero que al final hace sentido... como JavaScript 💛.",
+      "Debuguea como un crack con este DeskPad de JSConf Chile. Con un diseño inesperado como un 'undefined is not a function', pero que al final hace sentido... como JavaScript 💛.",
     imageUrls: [
-      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/9345ef87-8bea-4203-18cb-6f17a877b900/default",
+      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/ec03e5f8-b1e1-449a-62d9-8952a0e27300/default",
     ],
     value: "$ ??? Lukas",
   },
