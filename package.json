@@ -20,7 +20,7 @@
     "@darkroom.engineering/hamo": "^0.6.46",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "astro": "^4.16.15",
+    "astro": "^4.16.18",
     "framer-motion": "^11.11.17",
     "hamo": "^0.3.2",
     "lenis": "^1.1.17",
