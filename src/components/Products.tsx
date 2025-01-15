@@ -59,11 +59,11 @@ const products = [
   //   ],
   //   value: "$ 12 Lukas",
   //   sizes: [
-  //     { size: "S", url: "https://mpago.la/2r6cUy9" },
-  //     { size: "M", url: "https://mpago.la/2wTRHea" },
-  //     { size: "L", url: "https://mpago.la/1Wnt1mQ" },
-  //     { size: "XL", url: "https://mpago.la/1CMvnFx" },
-  //     { size: "2XL", url: "https://mpago.la/2GwVStY" },
+  //     { size: "S", url: "https://mpago.la/17ZyQgK" },
+  //     { size: "M", url: "https://mpago.la/2FpscR4" },
+  //     { size: "L", url: "https://mpago.la/2FUnJXk" },
+  //     { size: "XL", url: "https://mpago.la/27hAVkQ" },
+  //     { size: "2XL", url: "https://mpago.la/282cbtK" },
   //   ],
   // },
 ];
