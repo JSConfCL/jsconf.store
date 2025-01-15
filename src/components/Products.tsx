@@ -9,43 +9,50 @@ interface ProductSectionProps {
 
 const products = [
   {
-    id: 2,
-    modelName: "De(sk)bugger",
+    id: 3,
+    modelName: 'console.log("este es pal frio")',
     description:
-      "Debuguea como un crack con este DeskPad de JSConf Chile. Con un diseño inesperado como un 'undefined is not a function', pero que al final hace sentido... como JavaScript 💛.",
+      "Acogedor como JQuery, te envuelve como un closure. Este polerón es ideal para esas sesiones de programación en invierno.",
     imageUrls: [
-      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/ec03e5f8-b1e1-449a-62d9-8952a0e27300/default",
+      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/88698d55-8831-41b2-980e-fa958d057f00/default",
     ],
-    value: "$ 14 Lukas",
-  },
-  {
-    id: 4,
-    modelName: "H2-OS — (CommunityOS Edition)",
-    description: (
-      <>
-        Hidrátate cuando el sol está HOT(reload). Llenalo de agua o café. El
-        complemento perfecto para{" "}
-        <span className="line-through italic" style={{ fontSize: "0.8em" }}>
-          los dias de piscina
-        </span>{" "}
-        cuando trabajas desde la casa.
-      </>
-    ),
-    imageUrls: [
-      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/7ebd4672-aff5-4066-8677-d836a4cfa500/default",
+    value: "$ 32 Lukas",
+    sizes: [
+      { size: "S", url: "https://mpago.la/2r6cUy9" },
+      { size: "M", url: "https://mpago.la/2wTRHea" },
+      { size: "L", url: "https://mpago.la/1Wnt1mQ" },
+      { size: "XL", url: "https://mpago.la/1CMvnFx" },
+      { size: "2XL", url: "https://mpago.la/2GwVStY" },
     ],
-    value: "$ 20 Lukas",
   },
-  {
-    id: 1,
-    modelName: "undefined is not a pin",
-    description:
-      "Cuélgalo en tu mochila, en tu lanyard, gorro, o pontelo de aro! El pin de JSConf Chile 2024 es el complemento perfecto para cualquier evento de programación.",
-    imageUrls: [
-      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/1ead26c5-cfbd-4afc-cc20-739e79b40800/default",
-    ],
-    value: "$ 3 Lukas",
-  },
+  // {
+  //   id: 4,
+  //   modelName: "H2-OS — (CommunityOS Edition)",
+  //   description: (
+  //     <>
+  //       Hidrátate cuando el sol está HOT(reload). Llenalo de agua o café. El
+  //       complemento perfecto para{" "}
+  //       <span className="line-through italic" style={{ fontSize: "0.8em" }}>
+  //         los dias de piscina
+  //       </span>{" "}
+  //       cuando trabajas desde la casa.
+  //     </>
+  //   ),
+  //   imageUrls: [
+  //     "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/7ebd4672-aff5-4066-8677-d836a4cfa500/default",
+  //   ],
+  //   value: "$ 20 Lukas",
+  // },
+  // {
+  //   id: 1,
+  //   modelName: "undefined is not a pin",
+  //   description:
+  //     "Cuélgalo en tu mochila, en tu lanyard, gorro, o pontelo de aro! El pin de JSConf Chile 2024 es el complemento perfecto para cualquier evento de programación.",
+  //   imageUrls: [
+  //     "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/1ead26c5-cfbd-4afc-cc20-739e79b40800/default",
+  //   ],
+  //   value: "$ 3 Lukas",
+  // },
 ];
 
 const ProductsIn2Columns = ({
@@ -133,6 +140,53 @@ const ProductsIn2Columns = ({
               <p className="text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-right w-full">
                 {products[currentIndex].value}
               </p>
+              <div className="relative">
+                <div className="absolute -right-24 top-14 -translate-y-1/2">
+                  {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
+                  <svg
+                    fill="#fff"
+                    version="1.1"
+                    id="Capa_1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlnsXlink="http://www.w3.org/1999/xlink"
+                    width="64px"
+                    height="64px"
+                    viewBox="0 0 380.122 380.122"
+                  >
+                    <g>
+                      <path
+                        d="M379.632,148.271c-0.612-7.344-10.403-9.18-13.464-3.672c-9.792-6.12-22.644-10.404-31.824-15.3
+		c-15.3-7.956-31.823-16.524-48.96-21.42c-3.672-5.508-14.076-3.672-13.464,4.284c1.836,91.8-115.668,89.964-181.152,78.948
+		c0-7.344,0.612-14.688,0.612-21.42c0-3.06,0-6.12,0-9.18c0-1.836-3.06-7.344-3.06-4.896c0-0.612-0.612-1.224-0.612-1.836
+		c-6.732-18.972-79.56,29.376-86.904,41.616c-1.224,2.448-1.224,6.12,1.224,8.568c1.224,0.612,2.448,1.836,3.06,3.061l0,0
+		c-0.612,1.224-0.612,2.447-0.612,3.06c0.612,7.956,9.792,15.3,14.688,20.196c14.688,15.3,30.6,31.212,47.736,44.063
+		c2.448,1.836,7.344,1.225,9.18-1.224c0.612-0.612,0.612-1.225,1.224-1.225c0.612-0.611,0.612-1.836,0.612-3.06
+		c0.612-0.612,1.224-1.836,1.836-3.06c0.612-7.345,0.612-16.524,3.06-23.257c0-0.611,0.612-1.224,0.612-1.836
+		C171.552,282.911,391.872,282.911,379.632,148.271z M81.588,226.606c-0.612,0-1.836,0-2.448,0c-9.792,0-8.568,18.973-7.344,29.988
+		c-9.792-7.956-18.972-17.136-28.152-25.704c-6.732-6.12-12.852-12.239-18.972-18.972c-1.836-2.448-4.284-4.284-6.12-6.732
+		c-1.224-1.224-2.448-2.447-3.672-3.06c-1.224-0.612-1.836-0.612-1.836-0.612l-0.612-0.611c4.896-3.672,12.24-9.793,13.464-10.404
+		c9.18-6.121,18.36-11.017,28.152-15.913c3.672-1.836,15.912-5.508,25.092-10.404c0,0.612,0,1.224,0,1.836
+		c-1.224,7.956-2.448,15.912-2.448,24.48c0,5.508,4.284,7.344,7.956,7.344l0,0c68.544,29.376,198.288,13.464,202.572-77.724
+		c13.464,6.732,26.316,13.464,39.78,20.808c9.792,5.508,26.316,17.748,39.168,18.972
+		C358.824,279.239,156.252,249.251,81.588,226.606z"
+                      />
+                    </g>
+                  </svg>
+                </div>
+                <div className="flex gap-2 mt-10">
+                  {products[currentIndex].sizes?.map((size) => (
+                    <a
+                      key={size.size}
+                      href={size.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-1 border border-white rounded hover:bg-white hover:text-black transition-colors min-w-16 text-center"
+                    >
+                      {size.size}
+                    </a>
+                  ))}
+                </div>
+              </div>
             </motion.div>
           </AnimatePresence>
         </div>
@@ -226,7 +280,7 @@ const ProductsIn2Rows = ({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
             >
-              <div className="text  md:text-lg">
+              <div className="text md:text-lg">
                 <span className="block text-center">
                   <span className="font-bold bg-white text-black px-2 mr-2 rounded-sm">
                     modelo:
@@ -244,6 +298,54 @@ const ProductsIn2Rows = ({
               <p className="text md:text-2xl mt-2 font-bold text-right w-full">
                 {products[currentIndex].value}
               </p>
+              <div className="relative">
+                <div className="absolute -right-16 top-6 -translate-y-1/2">
+                  {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
+                  <svg
+                    fill="#fff"
+                    version="1.1"
+                    id="Capa_1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlnsXlink="http://www.w3.org/1999/xlink"
+                    width="38px"
+                    height="38px"
+                    viewBox="0 0 380.122 380.122"
+                  >
+                    <g>
+                      <path
+                        d="M379.632,148.271c-0.612-7.344-10.403-9.18-13.464-3.672c-9.792-6.12-22.644-10.404-31.824-15.3
+		c-15.3-7.956-31.823-16.524-48.96-21.42c-3.672-5.508-14.076-3.672-13.464,4.284c1.836,91.8-115.668,89.964-181.152,78.948
+		c0-7.344,0.612-14.688,0.612-21.42c0-3.06,0-6.12,0-9.18c0-1.836-3.06-7.344-3.06-4.896c0-0.612-0.612-1.224-0.612-1.836
+		c-6.732-18.972-79.56,29.376-86.904,41.616c-1.224,2.448-1.224,6.12,1.224,8.568c1.224,0.612,2.448,1.836,3.06,3.061l0,0
+		c-0.612,1.224-0.612,2.447-0.612,3.06c0.612,7.956,9.792,15.3,14.688,20.196c14.688,15.3,30.6,31.212,47.736,44.063
+		c2.448,1.836,7.344,1.225,9.18-1.224c0.612-0.612,0.612-1.225,1.224-1.225c0.612-0.611,0.612-1.836,0.612-3.06
+		c0.612-0.612,1.224-1.836,1.836-3.06c0.612-7.345,0.612-16.524,3.06-23.257c0-0.611,0.612-1.224,0.612-1.836
+		C171.552,282.911,391.872,282.911,379.632,148.271z M81.588,226.606c-0.612,0-1.836,0-2.448,0c-9.792,0-8.568,18.973-7.344,29.988
+		c-9.792-7.956-18.972-17.136-28.152-25.704c-6.732-6.12-12.852-12.239-18.972-18.972c-1.836-2.448-4.284-4.284-6.12-6.732
+		c-1.224-1.224-2.448-2.447-3.672-3.06c-1.224-0.612-1.836-0.612-1.836-0.612l-0.612-0.611c4.896-3.672,12.24-9.793,13.464-10.404
+		c9.18-6.121,18.36-11.017,28.152-15.913c3.672-1.836,15.912-5.508,25.092-10.404c0,0.612,0,1.224,0,1.836
+		c-1.224,7.956-2.448,15.912-2.448,24.48c0,5.508,4.284,7.344,7.956,7.344l0,0c68.544,29.376,198.288,13.464,202.572-77.724
+		c13.464,6.732,26.316,13.464,39.78,20.808c9.792,5.508,26.316,17.748,39.168,18.972
+		C358.824,279.239,156.252,249.251,81.588,226.606z"
+                      />
+                    </g>
+                  </svg>
+                </div>
+
+                <div className="flex gap-2 mt-3 justify-center">
+                  {products[currentIndex].sizes?.map((size) => (
+                    <a
+                      key={size.size}
+                      href={size.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-2 py-1 border border-white rounded hover:bg-white hover:text-black transition-colors text-sm min-w-14 text-center"
+                    >
+                      {size.size}
+                    </a>
+                  ))}
+                </div>
+              </div>
             </motion.div>
           </AnimatePresence>
         </div>
