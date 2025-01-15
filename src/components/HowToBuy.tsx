@@ -19,20 +19,19 @@ export const HowToBuy = () => {
       style={{ opacity, y }}
     >
       <div className="container mx-auto px-6">
-        <div className="flex flex-col items-center text-5xl md:text-6xl lg:text-8xl font-semibold font-mono">
-          Como?
+        <div className="flex flex-col items-center text-5xl md:text-6xl lg:text-8xl font-semibold font-mono text-center">
+          Solo por este meetup.
         </div>
         <br />
         <br />
         <br />
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center font-mono">
-          <span className="block leading-relaxed">Solo el 6/12/2025</span>
-          <span className="block leading-relaxed">en JSConf Chile</span>
+          <span className="block leading-relaxed">Y despues nunca mas.</span>
         </h2>
         <br />
         <br />
         <p className="text-center text-md md:text-lg lg:text-xl xl:text-2xl italic">
-          (y después, nunca más.)
+          (Bueno...hasta el domingo la verdad)
         </p>
       </div>
     </motion.section>
