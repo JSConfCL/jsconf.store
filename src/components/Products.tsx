@@ -25,33 +25,46 @@ const products = [
       { size: "2XL", url: "https://mpago.la/2GwVStY" },
     ],
   },
-  // {
-  //   id: 4,
-  //   modelName: "H2-OS — (CommunityOS Edition)",
-  //   description: (
-  //     <>
-  //       Hidrátate cuando el sol está HOT(reload). Llenalo de agua o café. El
-  //       complemento perfecto para{" "}
-  //       <span className="line-through italic" style={{ fontSize: "0.8em" }}>
-  //         los dias de piscina
-  //       </span>{" "}
-  //       cuando trabajas desde la casa.
-  //     </>
-  //   ),
-  //   imageUrls: [
-  //     "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/7ebd4672-aff5-4066-8677-d836a4cfa500/default",
-  //   ],
-  //   value: "$ 20 Lukas",
-  // },
+  {
+    id: 4,
+    modelName: "'undefined' is not a polera",
+    description: (
+      <>
+        Ideal para cuando estos meses de Verano!. Perfecta para{" "}
+        <span className="line-through italic" style={{ fontSize: "0.8em" }}>
+          los dias de piscina
+        </span>{" "}
+        cuando trabajas desde la casa.
+      </>
+    ),
+    imageUrls: [
+      "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/14c4e325-80fc-4aa1-9ac2-140afa70a000/default",
+    ],
+    value: "$ 12 Lukas",
+    sizes: [
+      { size: "S", url: "https://mpago.la/1ie9vFo" },
+      { size: "M", url: "https://mpago.la/1Nqbx4F" },
+      { size: "L", url: "https://mpago.la/2YeFteh" },
+      { size: "XL", url: "https://mpago.la/14Mw1L1" },
+      { size: "2XL", url: "https://mpago.la/2s5XY8R" },
+    ],
+  },
   // {
   //   id: 1,
-  //   modelName: "undefined is not a pin",
+  //   modelName: "cannot find 'polera' of null",
   //   description:
-  //     "Cuélgalo en tu mochila, en tu lanyard, gorro, o pontelo de aro! El pin de JSConf Chile 2024 es el complemento perfecto para cualquier evento de programación.",
+  //     "Ideal para cuando el sol está HOT(reload). Aprovecha este diseño para tu polera, lanyard, gorro, o pontelo de aro!",
   //   imageUrls: [
   //     "https://imagedelivery.net/dqFoxiedZNoncKJ9uqxz0g/1ead26c5-cfbd-4afc-cc20-739e79b40800/default",
   //   ],
-  //   value: "$ 3 Lukas",
+  //   value: "$ 12 Lukas",
+  //   sizes: [
+  //     { size: "S", url: "https://mpago.la/2r6cUy9" },
+  //     { size: "M", url: "https://mpago.la/2wTRHea" },
+  //     { size: "L", url: "https://mpago.la/1Wnt1mQ" },
+  //     { size: "XL", url: "https://mpago.la/1CMvnFx" },
+  //     { size: "2XL", url: "https://mpago.la/2GwVStY" },
+  //   ],
   // },
 ];
 
